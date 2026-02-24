@@ -20,7 +20,15 @@ fn main() {
             right: None,
         }))),
     })));
+    // ascii tree:
+    //     1
+    //      \
+    //       2
+    //      /
+    //     3
 
-    let result = TreeTraverser::preorder_traversal(root);
-    println!("{:?}", result); // Should print [1, 2, 3]
+    let result = TreeTraverser::preorder_traversal(root.clone());
+    println!("Preorder traversal: {:?}", result); // Should print [1, 2, 3]
+    let result = TreeTraverser::inorder_traversal(root.clone());
+    println!("Inorder traversal: {:?}", result); // Should print [1, 3, 2]
 }

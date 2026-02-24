@@ -24,4 +24,32 @@ impl TreeTraverser {
         }
         res
     }
+
+    pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+        let mut res = Vec::new();
+        let mut stack = Vec::new();
+        let mut cur = root;
+
+        while cur.is_some() || !stack.is_empty() {
+            // println!("{:?}", cur);
+            while let Some(rc) = cur {
+                stack.push(rc.clone());
+                cur = {
+                    let node = rc.borrow();
+                    node.left.clone()
+                };
+            }
+            cur = stack.pop();
+            if let Some(ref rc) = cur {
+                let (val, right) = {
+                    let node = rc.borrow();
+                    (node.val, node.right.clone())
+                };
+                res.push(val);
+                cur = right;  
+            };
+        }
+
+        res
+    }
 }
